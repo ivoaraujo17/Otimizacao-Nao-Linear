@@ -50,10 +50,8 @@ def busca_goldstein(f, vars, x, d, t, lambda_=0.8, eta=0.1, verbose=True):
 
     # Calcula o gradiente da f no ponto inicial produto interno com a direção
     grad_fx_d = np.dot(grad_fx, d)
-
     # Define o ponto x + t*d
     x_mais_td = x + t*d
-
     # Aplica o ponto x + t*d na funcao
     f_x_mais_td = f.subs(dict(zip(vars, x_mais_td)))
     k = 0
@@ -73,19 +71,23 @@ def busca_goldstein(f, vars, x, d, t, lambda_=0.8, eta=0.1, verbose=True):
         print(f"    f'(x)*d = {grad_fx_d}")
         print_passo(k, x_mais_td, t, fx + (1-eta)*t*grad_fx_d, f_x_mais_td, fx + eta*t*grad_fx_d)
 
+    # Enquanto o critério de Goldstein não for satisfeito
     while (fx + (1-eta)*t*grad_fx_d > f_x_mais_td) or (f_x_mais_td > fx + eta*t*grad_fx_d):
+        # Atualiza o valor de t
         t = lambda_*t
+        # Atualiza o ponto x + t*d
         x_mais_td = x + t*d
+        # Aplica o ponto x + t*d na função
         f_x_mais_td = f.subs(dict(zip(vars, x_mais_td)))
         k += 1
 
         if verbose:
             print_passo(k, x_mais_td, t, fx + (1-eta)*t*grad_fx_d, f_x_mais_td, fx + eta*t*grad_fx_d)
-
+        # Se o tamanho do passo for muito pequeno, retorna um erro
         if t < 1e-10:
-            return [False, t, k]
+            raise ValueError("Erro de Bracketing.")
 
-    return [True, t, k]        
+    return t       
 
 
 if __name__ == '__main__':

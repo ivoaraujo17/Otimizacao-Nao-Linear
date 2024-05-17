@@ -110,10 +110,9 @@ def busca_wolfe(f, var, x, d, t_inicial, lambda_=0.8, eta1=1e-2, eta2=1e-1, verb
                         gradiente_f_x_mais_td, np.dot(gradiente_f_x_mais_td, d), eta2*gradiente_f_ponto_inicial_d)
         # Verifica se o tamanho do passo é muito pequeno
         if t < 1e-8:
-            print('Erro no Backtracking')
-            return [False, t, k]
+            raise ValueError("Erro de Bracketing.")
     
-    return [True, t, k]
+    return t
 
 
 if __name__ == "__main__":

@@ -76,18 +76,15 @@ def busca_linear_armijo(funcao, variaveis, ponto_inicial, direcao, t_inicial, la
     while funcao_x_mais_td > funcao_ponto_inicial + eta*t*np.dot(derivada_funcao_ponto_inicial, direcao):
         # Atualiza o valor de t
         t *= lamda
-
         # Atualiza o ponto x + t*d
         x_mais_td = ponto_inicial + t*direcao
-        
         # Aplica o ponto x + t*d na função
         funcao_x_mais_td = funcao.subs(dict(zip(variaveis, x_mais_td)))
-        
         # Atualiza o número de iterações e verifica se o tamanho do passo é muito pequeno
         k += 1
         if verbose:
             print_passo(k, x_mais_td, t, funcao_x_mais_td, funcao_ponto_inicial + eta*t*np.dot(derivada_funcao_ponto_inicial, direcao))
-
+        # Se o tamanho do passo for muito pequeno, retorna um erro
         if t < 1e-8:
             raise ValueError("Erro de Bracketing.")
 

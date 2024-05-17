@@ -100,9 +100,9 @@ class Gradiente:
             # Nova direção = -gradiente
             d = np.array([-grad for grad in grad_f_xk])
             # Busca linear de Wolfe
-            result = busca_wolfe(f, self.var, xk, d, tk, lambda_, eta1, eta2, verbose=verbose)
+            t = busca_wolfe(f, self.var, xk, d, tk, lambda_, eta1, eta2, verbose=verbose)
             # Atualiza o passo
-            tk = result[1]
+            tk = t
             # Atualiza o ponto
             xk = xk + tk * d
             # Atualiza o gradiente no novo ponto
@@ -132,9 +132,9 @@ class Gradiente:
             # Nova direção = -gradiente
             d = np.array([-grad for grad in grad_f_xk])
             # Busca linear de Goldstein
-            result = busca_goldstein(f, self.var, xk, d, tk, lambda_, eta, verbose=verbose)
+            t = busca_goldstein(f, self.var, xk, d, tk, lambda_, eta, verbose=verbose)
             # Atualiza o passo
-            tk = result[1]
+            tk = t
             # Atualiza o ponto
             xk = xk + tk * d
             # Atualiza o gradiente no novo ponto
