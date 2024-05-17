@@ -15,7 +15,7 @@ def print_passo(k, x_mais_td, t, funcao_x_mais_td, f_x_mais_eta1_t_f_linha_x_d,
 
 
 
-def busca_wolfe(f, var, x, d, t_inicial, lambda_, eta1=1e-2, eta2=1e-1, verbose=True):
+def busca_wolfe(f, var, x, d, t_inicial, lambda_=0.8, eta1=1e-2, eta2=1e-1, verbose=True):
     """
     Realiza a busca de passo pela condição de Wolfe.
 
