@@ -48,7 +48,7 @@ def busca_linear_armijo(funcao, variaveis, ponto_inicial, direcao, t_inicial, la
     # Calcula o gradiente da função e aplica no ponto inicial
     derivada_funcao = [sp.diff(funcao, var) for var in variaveis]
     derivada_funcao_ponto_inicial = [derivada.subs(dict(zip(variaveis, ponto_inicial))) for derivada in derivada_funcao]
-
+    derivada_funcao_ponto_inicial_d = np.dot(derivada_funcao_ponto_inicial, direcao)
     # define o ponto x + t*d
     x_mais_td = ponto_inicial + t_inicial*direcao
     
@@ -60,9 +60,16 @@ def busca_linear_armijo(funcao, variaveis, ponto_inicial, direcao, t_inicial, la
     if verbose:
         print("\n----------------- Busca Linear Armijo -----------------")
         print(f"f = {funcao}")
-        print(f"f(x_) = {funcao_ponto_inicial}")
+        print(f"x = {ponto_inicial}")
+        print(f"d = {direcao}")
+        print(f"t inicial = {t_inicial}")
+        print(f"lambda = {lamda}")
+        print(f"eta = {eta}")
+        print("-----------------")
+        print(f"f(x) = {funcao_ponto_inicial}")
         print(f"f' = {derivada_funcao}")
-        print(f"f'(x_) = {derivada_funcao_ponto_inicial}")
+        print(f"f'(x) = {derivada_funcao_ponto_inicial}")
+        print(f"f'(x)*d = {derivada_funcao_ponto_inicial_d}")
         print_passo(k, x_mais_td, t, funcao_x_mais_td, funcao_ponto_inicial + eta*t*np.dot(derivada_funcao_ponto_inicial, direcao))
     
     while funcao_x_mais_td > funcao_ponto_inicial + eta*t*np.dot(derivada_funcao_ponto_inicial, direcao):
