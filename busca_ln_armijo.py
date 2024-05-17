@@ -3,11 +3,11 @@ import sympy as sp
 
 
 def print_passo(k, x_mais_td, t, funcao_x_mais_td, f_x_mais_eta_t_f_linha_x_d):
-    print(f"\n----------------- Iteração = {k} -----------------")
-    print(f"t = {t}")
-    print(f"x + t*d = {x_mais_td}")
-    print(f"f(x + t*d) = {funcao_x_mais_td}")
-    print(f"f(x) + eta*t*f'(x)*d = {f_x_mais_eta_t_f_linha_x_d}")
+    print(f"    ----------------- Iteração = {k} -----------------")
+    print(f"    t = {t}")
+    print(f"    x + t*d = {x_mais_td}")
+    print(f"    f(x + t*d) = {funcao_x_mais_td}")
+    print(f"    f(x) + eta*t*f'(x)*d = {f_x_mais_eta_t_f_linha_x_d}")
 
 
 
@@ -58,18 +58,19 @@ def busca_linear_armijo(funcao, variaveis, ponto_inicial, direcao, t_inicial, la
     t = t_inicial
     k=0
     if verbose:
-        print("\n----------------- Busca Linear Armijo -----------------")
-        print(f"f = {funcao}")
-        print(f"x = {ponto_inicial}")
-        print(f"d = {direcao}")
-        print(f"t inicial = {t_inicial}")
-        print(f"lambda = {lamda}")
-        print(f"eta = {eta}")
-        print("-----------------")
-        print(f"f(x) = {funcao_ponto_inicial}")
-        print(f"f' = {derivada_funcao}")
-        print(f"f'(x) = {derivada_funcao_ponto_inicial}")
-        print(f"f'(x)*d = {derivada_funcao_ponto_inicial_d}")
+        print(f"    ----------------- Busca Linear Armijo -----------------")
+        print(f"    Parametros:")
+        print(f"    f = {funcao}")
+        print(f"    x = {ponto_inicial}")
+        print(f"    d = {direcao}")
+        print(f"    t inicial = {t_inicial}")
+        print(f"    lambda = {lamda}")
+        print(f"    eta = {eta}")
+        print(f"    ----------------- Valores Constantes -----------------")
+        print(f"    f(x) = {funcao_ponto_inicial}")
+        print(f"    f' = {derivada_funcao}")
+        print(f"    f'(x) = {derivada_funcao_ponto_inicial}")
+        print(f"    f'(x)*d = {derivada_funcao_ponto_inicial_d}")
         print_passo(k, x_mais_td, t, funcao_x_mais_td, funcao_ponto_inicial + eta*t*np.dot(derivada_funcao_ponto_inicial, direcao))
     
     while funcao_x_mais_td > funcao_ponto_inicial + eta*t*np.dot(derivada_funcao_ponto_inicial, direcao):
@@ -88,10 +89,9 @@ def busca_linear_armijo(funcao, variaveis, ponto_inicial, direcao, t_inicial, la
             print_passo(k, x_mais_td, t, funcao_x_mais_td, funcao_ponto_inicial + eta*t*np.dot(derivada_funcao_ponto_inicial, direcao))
 
         if t < 1e-8:
-            print('Erro no Backtracking')
-            return [False, t, k]
+            raise ValueError("Erro de Bracketing.")
 
-    return [True, t, k]
+    return t
 
 
 if __name__ == "__main__":

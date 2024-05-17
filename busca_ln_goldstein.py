@@ -3,12 +3,12 @@ import sympy as sp
 
 
 def print_passo(k, x_mais_td, t, fx_mais_um_menos_eta_t_f_linha_x_d, fx_mais_td, fx_mais_eta_t_f_linha_x_d):
-    print(f"\n----------------- Iteração = {k} -----------------")
-    print(f"t = {t}")
-    print(f"x + t*d = {x_mais_td}")
-    print(f"f(x) + (1 - eta)*t*f'(x)*d = {fx_mais_um_menos_eta_t_f_linha_x_d}")
-    print(f"f(x + t*d) = {fx_mais_td}")
-    print(f"f(x) + eta*t*f'(x)*d = {fx_mais_eta_t_f_linha_x_d}")
+    print(f"    ----------------- Iteração = {k} -----------------")
+    print(f"    t = {t}")
+    print(f"    x + t*d = {x_mais_td}")
+    print(f"    f(x) + (1 - eta)*t*f'(x)*d = {fx_mais_um_menos_eta_t_f_linha_x_d}")
+    print(f"    f(x + t*d) = {fx_mais_td}")
+    print(f"    f(x) + eta*t*f'(x)*d = {fx_mais_eta_t_f_linha_x_d}")
 
 
 def busca_goldstein(f, vars, x, d, t, lambda_=0.8, eta=0.1, verbose=True):
@@ -59,18 +59,18 @@ def busca_goldstein(f, vars, x, d, t, lambda_=0.8, eta=0.1, verbose=True):
     k = 0
 
     if verbose:
-        print("\n----------------- Busca Linear Goldstein -----------------")
-        print(f"f = {f}")
-        print(f"x = {x}")
-        print(f"d = {d}")
-        print(f"t inicial = {t}")
-        print(f"lambda = {lambda_}")
-        print(f"eta = {eta}")
-        print("-----------------")
-        print(f"f(x) = {fx}")
-        print(f"f' = {grad_f}")
-        print(f"f'(x) = {grad_fx}")
-        print(f"f'(x)*d = {grad_fx_d}")
+        print(f"    ----------------- Busca Linear Goldstein ---------------")
+        print(f"    f = {f}")
+        print(f"    x = {x}")
+        print(f"    d = {d}")
+        print(f"    t inicial = {t}")
+        print(f"    lambda = {lambda_}")
+        print(f"    eta = {eta}")
+        print(f"    ----------------- Valores Constantes -----------------")
+        print(f"    f(x) = {fx}")
+        print(f"    f' = {grad_f}")
+        print(f"    f'(x) = {grad_fx}")
+        print(f"    f'(x)*d = {grad_fx_d}")
         print_passo(k, x_mais_td, t, fx + (1-eta)*t*grad_fx_d, f_x_mais_td, fx + eta*t*grad_fx_d)
 
     while (fx + (1-eta)*t*grad_fx_d > f_x_mais_td) or (f_x_mais_td > fx + eta*t*grad_fx_d):

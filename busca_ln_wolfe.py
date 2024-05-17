@@ -4,14 +4,14 @@ import sympy as sp
 
 def print_passo(k, x_mais_td, t, funcao_x_mais_td, f_x_mais_eta1_t_f_linha_x_d, 
                 grad_f_x_mais_td, np_dot_grad_f_x_mais_td_com_d, eta2_f_linha_x_d):
-    print(f"\n----------------- Iteração = {k} -----------------")
-    print(f"t = {t}")
-    print(f"x + t*d = {x_mais_td}")
-    print(f"f(x + t*d) = {funcao_x_mais_td}")
-    print(f"f(x_) + eta*t*f'(x)*d = {f_x_mais_eta1_t_f_linha_x_d}")
-    print(f"f'(x + t*d) = {grad_f_x_mais_td}")
-    print(f"f'(x + t*d)*d = {np_dot_grad_f_x_mais_td_com_d}")
-    print(f"n2*f'(x)*d = {eta2_f_linha_x_d}")
+    print(f"    ----------------- Iteração = {k} -----------------")
+    print(f"    t = {t}")
+    print(f"    x + t*d = {x_mais_td}")
+    print(f"    f(x + t*d) = {funcao_x_mais_td}")
+    print(f"    f(x_) + eta*t*f'(x)*d = {f_x_mais_eta1_t_f_linha_x_d}")
+    print(f"    f'(x + t*d) = {grad_f_x_mais_td}")
+    print(f"    f'(x + t*d)*d = {np_dot_grad_f_x_mais_td_com_d}")
+    print(f"    n2*f'(x)*d = {eta2_f_linha_x_d}")
 
 
 
@@ -76,19 +76,20 @@ def busca_wolfe(f, var, x, d, t_inicial, lambda_=0.8, eta1=1e-2, eta2=1e-1, verb
     t = t_inicial
     k = 0
     if verbose:
-        print(f"\n----------------- Busca Linear Wolfe -----------------")
-        print(f"f = {f}")
-        print(f"x = {x}")
-        print(f"d = {d}")
-        print(f"t inicial = {t_inicial}")
-        print(f"lambda = {lambda_}")
-        print(f"eta1 = {eta1}")
-        print(f"eta2 = {eta2}")
-        print("-----------------")
-        print(f"f(x) = {f_ponto_inicial}")
-        print(f"f' = {gradiente_f}")
-        print(f"f'(x) = {gradiente_f_ponto_inicial}")
-        print(f"f'(x)*d = {gradiente_f_ponto_inicial_d}")
+        print(f"    ----------------- Busca Linear Wolfe -----------------")
+        print(f"    Parametros:")
+        print(f"    f = {f}")
+        print(f"    x = {x}")
+        print(f"    d = {d}")
+        print(f"    t inicial = {t_inicial}")
+        print(f"    lambda = {lambda_}")
+        print(f"    eta1 = {eta1}")
+        print(f"    eta2 = {eta2}")
+        print(f"    ----------------- Valores Constantes -----------------")
+        print(f"    f(x) = {f_ponto_inicial}")
+        print(f"    f' = {gradiente_f}")
+        print(f"    f'(x) = {gradiente_f_ponto_inicial}")
+        print(f"    f'(x)*d = {gradiente_f_ponto_inicial_d}")
         print_passo(k, x_mais_td, t, f_x_mais_td, f_ponto_inicial + eta1*t*gradiente_f_ponto_inicial_d,
                     gradiente_f_x_mais_td, np.dot(gradiente_f_x_mais_td, d), eta2*gradiente_f_ponto_inicial_d)
 
