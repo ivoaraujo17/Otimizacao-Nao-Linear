@@ -2,12 +2,12 @@ import numpy as np
 import sympy as sp
 
 
-def print_passo(k, x_mais_td, t, funcao_ponto_inicial_mais_td, eta_t_f_linha_x_d):
+def print_passo(k, x_mais_td, t, funcao_x_mais_td, f_x_mais_eta_t_f_linha_x_d):
     print(f"\n----------------- Iteração = {k} -----------------")
     print(f"t = {t}")
     print(f"x + t*d = {x_mais_td}")
-    print(f"f(x + t*d) = {funcao_ponto_inicial_mais_td}")
-    print(f"eta*t*f'(x)*d = {eta_t_f_linha_x_d}")
+    print(f"f(x + t*d) = {funcao_x_mais_td}")
+    print(f"f(x) + eta*t*f'(x)*d = {eta_t_f_linha_x_d}")
 
 
 
@@ -53,7 +53,7 @@ def busca_linear_armijo(funcao, variaveis, ponto_inicial, direcao, t_inicial, la
     x_mais_td = ponto_inicial + t_inicial*direcao
     
     # Aplica o ponto x + t*d na função
-    funcao_ponto_inicial_mais_td = funcao.subs(dict(zip(variaveis, x_mais_td)))
+    funcao_x_mais_td = funcao.subs(dict(zip(variaveis, x_mais_td)))
     
     t = t_inicial
     k=0
@@ -63,9 +63,9 @@ def busca_linear_armijo(funcao, variaveis, ponto_inicial, direcao, t_inicial, la
         print(f"f(x_) = {funcao_ponto_inicial}")
         print(f"f' = {derivada_funcao}")
         print(f"f'(x_) = {derivada_funcao_ponto_inicial}")
-        print_passo(k, x_mais_td, t, funcao_ponto_inicial_mais_td, funcao_ponto_inicial + eta*t*np.dot(derivada_funcao_ponto_inicial, direcao))
+        print_passo(k, x_mais_td, t, funcao_x_mais_td, funcao_ponto_inicial + eta*t*np.dot(derivada_funcao_ponto_inicial, direcao))
     
-    while funcao_ponto_inicial_mais_td > funcao_ponto_inicial + eta*t*np.dot(derivada_funcao_ponto_inicial, direcao):
+    while funcao_x_mais_td > funcao_ponto_inicial + eta*t*np.dot(derivada_funcao_ponto_inicial, direcao):
         # Atualiza o valor de t
         t *= lamda
 
@@ -73,12 +73,12 @@ def busca_linear_armijo(funcao, variaveis, ponto_inicial, direcao, t_inicial, la
         x_mais_td = ponto_inicial + t*direcao
         
         # Aplica o ponto x + t*d na função
-        funcao_ponto_inicial_mais_td = funcao.subs(dict(zip(variaveis, x_mais_td)))
+        funcao_x_mais_td = funcao.subs(dict(zip(variaveis, x_mais_td)))
         
         # Atualiza o número de iterações e verifica se o tamanho do passo é muito pequeno
         k += 1
         if verbose:
-            print_passo(k, x_mais_td, t, funcao_ponto_inicial_mais_td, funcao_ponto_inicial + eta*t*np.dot(derivada_funcao_ponto_inicial, direcao))
+            print_passo(k, x_mais_td, t, funcao_x_mais_td, funcao_ponto_inicial + eta*t*np.dot(derivada_funcao_ponto_inicial, direcao))
 
         if t < 1e-8:
             print('Erro no Backtracking')
