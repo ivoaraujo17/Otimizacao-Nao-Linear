@@ -7,7 +7,7 @@ def print_passo(k, x_mais_td, t, funcao_x_mais_td, f_x_mais_eta_t_f_linha_x_d):
     print(f"t = {t}")
     print(f"x + t*d = {x_mais_td}")
     print(f"f(x + t*d) = {funcao_x_mais_td}")
-    print(f"f(x) + eta*t*f'(x)*d = {eta_t_f_linha_x_d}")
+    print(f"f(x) + eta*t*f'(x)*d = {f_x_mais_eta_t_f_linha_x_d}")
 
 
 
