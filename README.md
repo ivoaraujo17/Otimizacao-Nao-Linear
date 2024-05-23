@@ -9,3 +9,4 @@
 - Busca Linear Goldstein
 - Método do Gradiente
    - Utilizando busca exata, Armijo, Wolfe e Goldstein
+- Método do Gradiente Conjulgado
